@@ -13,7 +13,7 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('weasy.db.prefix').'accounts', function (Blueprint $table) {
+        Schema::create('wechat_accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 60)->comment('公众号名称');
             $table->string('original_id',20)->comment('原始id');
@@ -37,6 +37,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('weasy.db.prefix').'accounts');
+        Schema::dropIfExists('wechat_accounts');
     }
 }

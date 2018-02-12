@@ -6,11 +6,10 @@
  * Time: 下午5:47
  */
 
-namespace Modules\Admin;
+namespace Modules\Weasy;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Modules\Weasy\Commands\WeasyCommand;
 
 class WeasyServiceProvider extends ServiceProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Seeds;
+namespace Modules\Weasy\Seeds;
 
 use Illuminate\Database\Seeder;
 
@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        //$this->call(AdminPermissionsTableSeeder::class);
+        $this->call(WeasyPermissionsTableSeeder::class);
     }
 }
