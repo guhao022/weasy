@@ -12,7 +12,7 @@ class Accounts extends Model
         //
     }
 
-    protected $table = "wx_accounts";
+    protected $table = "weasy_accounts";
 
 
 }

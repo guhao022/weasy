@@ -8,12 +8,12 @@ Route::group([
 
     Route::get('/', 'HomeController@index')->name('weasy.home');
 
-    Route::group(['prefix' => 'wxmp'], function (){
-        Route::get('/', 'MPController@index')->name('weasy.mp.index');
-        Route::get('create', 'MPController@create')->name('weasy.mp.create');
-        Route::post('store', 'MPController@store')->name('weasy.mp.store');
-        Route::get('edit/{id}', 'MPController@edit')->name('weasy.mp.update');
-        Route::put('update/{id}', 'MPController@update')->name('weasy.mp.update');
-        Route::delete('destroy', 'MPController@destroy')->name('weasy.mp.destroy');
+    Route::group(['prefix' => 'account'], function (){
+        Route::get('/', 'AccountController@index')->name('weasy.account.index');
+        Route::get('create', 'AccountController@create')->name('weasy.account.create');
+        Route::post('store', 'AccountController@store')->name('weasy.account.store');
+        Route::get('edit/{id}', 'AccountController@edit')->name('weasy.account.update');
+        Route::put('update/{id}', 'AccountController@update')->name('weasy.account.update');
+        Route::delete('destroy', 'AccountController@destroy')->name('weasy.account.destroy');
     });
 });

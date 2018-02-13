@@ -2,7 +2,9 @@
 
 namespace Modules\Weasy\Controllers;
 
-class MPController extends Controller {
+use Modules\Weasy\Models\Accounts;
+
+class AccountController extends Controller {
 
     public function __construct()
     {
@@ -11,7 +13,13 @@ class MPController extends Controller {
 
     // 公众号列表
     public function index() {
-        //
+        $accounts = Accounts::all();
+
+        if (empty($accounts)) {
+            echo 123;die;
+        }
+
+        return weasy_view('account.index');
     }
 
     // 添加公众号

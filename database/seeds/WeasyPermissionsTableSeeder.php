@@ -27,47 +27,47 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1001,
-                'name'=>'weasy.mp',
+                'name'=>'weasy.account',
                 'display_name'=>'公众号',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
-                'group_name'=>'wxmp',
+                'group_name'=>'account',
                 'pid'=>1000
             ],
             [
                 'id'=>1002,
-                'name'=>'weasy.mp.index',
+                'name'=>'weasy.account.index',
                 'display_name'=>'公众号管理',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
-                'group_name'=>'wxmp',
+                'group_name'=>'account',
                 'pid'=>1001
             ],
             [
                 'id'=>1003,
-                'name'=>'weasy.mp.create',
+                'name'=>'weasy.account.create',
                 'display_name'=>'新增公众号',
                 'icon' => '',
                 'is_menu' => '0',
-                'group_name'=>'wxmp',
+                'group_name'=>'account',
                 'pid'=>1002
             ],
             [
                 'id'=>1004,
-                'name'=>'weasy.mp.update',
+                'name'=>'weasy.account.update',
                 'display_name'=>'更新公众号',
                 'icon' => '',
                 'is_menu' => '0',
-                'group_name'=>'wxmp',
+                'group_name'=>'account',
                 'pid'=>1002
             ],
             [
                 'id'=>1005,
-                'name'=>'weasy.mp.destroy',
+                'name'=>'weasy.account.destroy',
                 'display_name'=>'删除公众号',
                 'icon' => '',
                 'is_menu' => '0',
-                'group_name'=>'wxmp',
+                'group_name'=>'account',
                 'pid'=>1002
             ],
         ];
