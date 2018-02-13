@@ -47,7 +47,14 @@ class WeasyServiceProvider extends ServiceProvider
             ]);
         }
 
+        $this->loadHelper();
+
         //
+    }
+
+    protected function loadHelper()
+    {
+        require_once __DIR__.'/helper.php';
     }
 
     /**
