@@ -35,7 +35,7 @@ class MPController extends Controller {
     }
 
     // 删除公众号
-    public function delete($id) {
+    public function destroy() {
         //
     }
 

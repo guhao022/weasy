@@ -18,7 +18,7 @@ class WeasyPermissionsTableSeeder extends Seeder
         $permissions = [
             [
                 'id'=>1000,
-                'name'=>'wechat',
+                'name'=>'weasy.home',
                 'display_name'=>'微信',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
@@ -27,7 +27,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1001,
-                'name'=>'wechat.mp',
+                'name'=>'weasy.mp',
                 'display_name'=>'公众号',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
@@ -36,7 +36,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1002,
-                'name'=>'wechat.mp.index',
+                'name'=>'weasy.mp.index',
                 'display_name'=>'公众号管理',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
@@ -45,7 +45,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1003,
-                'name'=>'wechat.mp.create',
+                'name'=>'weasy.mp.create',
                 'display_name'=>'新增公众号',
                 'icon' => '',
                 'is_menu' => '0',
@@ -54,7 +54,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1004,
-                'name'=>'wechat.mp.update',
+                'name'=>'weasy.mp.update',
                 'display_name'=>'更新公众号',
                 'icon' => '',
                 'is_menu' => '0',
@@ -63,7 +63,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1005,
-                'name'=>'wechat.mp.destroy',
+                'name'=>'weasy.mp.destroy',
                 'display_name'=>'删除公众号',
                 'icon' => '',
                 'is_menu' => '0',
