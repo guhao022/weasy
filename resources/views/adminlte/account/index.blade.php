@@ -36,14 +36,23 @@
                     @foreach($accounts as $account)
                     <tr id="tr_{{$account->name}}">
                         <td>{{$account->wechat_account}}</td>
-                        <td>{{$account->email}}</td>
-                        <td>{{$admin->name}}</td>
+                        <td>
+                            @if($account->type == 1)
+                                订阅号
+                            @elseif($account->type == 2)
+                                服务号
+                            @endif
+
+                        </td>
+                        <td>{{$account->created_at}}</td>
                         <td>
                             @if(admin_user()->can('weasy.account.update') || admin_user()->hasRole('admin'))
-                                <a href="{{ route('admin.edit', $admin->id) }}">
+                                <a href="{{ route('weasy.account.update', $admin->id) }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a href="javascript:void(0);" data-id="{{$admin->id}}" data-route="{{route('admin.destroy', $admin->id)}}"class="grid-row-delete">
+                            @endif
+                            @if(admin_user()->can('weasy.account.destroy') || admin_user()->hasRole('admin'))
+                                <a href="javascript:void(0);" data-id="{{$admin->id}}" data-route="{{route('weasy.account.destroy')}}"class="grid-row-delete">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             @endif

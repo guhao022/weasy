@@ -22,7 +22,8 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'display_name'=>'微信',
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
-                'group_name'=>'wechat',
+                'group_name'=>'weasy',
+                'mod_name' => 'weasy',
                 'pid'=>0
             ],
             [
@@ -32,6 +33,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
                 'group_name'=>'account',
+                'mod_name' => 'weasy',
                 'pid'=>1000
             ],
             [
@@ -41,6 +43,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon' => 'fa-weixin',
                 'is_menu' => '1',
                 'group_name'=>'account',
+                'mod_name' => 'weasy',
                 'pid'=>1001
             ],
             [
@@ -50,6 +53,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon' => '',
                 'is_menu' => '0',
                 'group_name'=>'account',
+                'mod_name' => 'weasy',
                 'pid'=>1002
             ],
             [
@@ -59,6 +63,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon' => '',
                 'is_menu' => '0',
                 'group_name'=>'account',
+                'mod_name' => 'weasy',
                 'pid'=>1002
             ],
             [
@@ -68,6 +73,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon' => '',
                 'is_menu' => '0',
                 'group_name'=>'account',
+                'mod_name' => 'weasy',
                 'pid'=>1002
             ],
         ];
@@ -80,6 +86,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'icon'=>$permission['icon'],
                 'is_menu'=>$permission['is_menu'],
                 'group_name'=>$permission['group_name'],
+                'mod_name'=>$permission['mod_name'],
                 'pid'=>$permission['pid']
             ]);
         }
