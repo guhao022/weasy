@@ -16,3 +16,14 @@ if (! function_exists('weasy_view')) {
     }
 }
 
+if (! function_exists('account')) {
+    /**
+     * 返回当前公众号.
+     *
+     * @return mixed
+     */
+    function account()
+    {
+        return app('weasy.account_service');
+    }
+}

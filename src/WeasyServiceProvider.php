@@ -10,6 +10,8 @@ namespace Modules\Weasy;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Weasy\Commands\WeasyCommand;
+use Modules\Weasy\Models\Accounts;
+use Modules\Weasy\Services\Account as AccountService;
 
 class WeasyServiceProvider extends ServiceProvider
 {
@@ -57,6 +59,10 @@ class WeasyServiceProvider extends ServiceProvider
         require_once __DIR__.'/helper.php';
     }
 
+    protected function loadObserver() {
+        Accounts::observe('Modules\Weasy\Observers\AccountObserver');
+    }
+
     /**
      * Register the application services.
      *
@@ -64,7 +70,19 @@ class WeasyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerAccountService();
+    }
+
+    /**
+     * 注册公众号服务单例.
+     *
+     * @return AccountService
+     */
+    protected function registerAccountService()
+    {
+        $this->app->singleton('weasy.account_service', function () {
+            return new AccountService();
+        });
     }
 
 

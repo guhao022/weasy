@@ -3,15 +3,18 @@
 namespace Modules\Weasy\Controllers;
 
 use Modules\Weasy\Models\Accounts;
+use Modules\Weasy\Repositories\AccountRepository;
 use Modules\Weasy\Validation\Accounts\Create;
 
 class AccountController extends Controller {
 
     protected $account;
 
-    public function __construct()
+    public function __construct(AccountRepository $accountRepository)
     {
         parent::__construct();
+
+        $this->account = $accountRepository;
     }
 
     // 公众号列表

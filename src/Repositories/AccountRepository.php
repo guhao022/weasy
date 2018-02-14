@@ -79,7 +79,12 @@ class AccountRepository
      */
     public function savePost($account, $input)
     {
-        $account->fill($input->all());
+        $account->name = $input->name;
+        $account->original_id = $input->original_id;
+        $account->wechat_account = $input->wechat_account;
+        $account->app_id = $input->app_id;
+        $account->app_secret = $input->app_secret;
+        $account->account_type = $input->account_type;
 
         return $account->save();
     }

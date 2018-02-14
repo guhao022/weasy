@@ -10,29 +10,25 @@ class Create extends Validator
     public function rules()
     {
         return [
-            'email'=>'required|email|unique:admin_user',
-            'name'=>'required|unique:admin_user|max:20',
-            'password'=>'required|confirmed|min:6',
-            'password_confirmation'=>'required',
-            'role_ids'=>'required|array'
+            'name'=>'required|unique:weasy_accounts',
+            'original_id'=>'required|unique:weasy_accounts',
+            'app_id'=>'required|unique:weasy_accounts',
+            'app_secret'=>'required',
+            'account_type'=>'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => '登录邮箱不能为空',
-            'email.email' => '邮箱格式错误',
-            'email.unique' => '登录邮箱已经注册',
-            'name.required' => '用户名不能为空',
-            'name.unique'  => '用户名已经存在',
-            'name.max'  => '用户名最长为20个字符',
-            'password.required'  => '密码不能为空',
-            'password.min'  => '密码最少6个字符',
-            'password.confirmed'  => '两次输入不一致',
-            'password_confirmation.required'  => '验证密码不能为空',
-            'role_ids.required'  => '请选择权限',
-            'role_ids.array'  => '权限格式错误',
+            'name.required' => '公众号名称不能为空',
+            'name.unique'  => '公众号已经存在',
+            'original_id.required' => '原始id不能为空',
+            'original_id.unique'  => '原始id已经存在',
+            'app_id.required' => 'AppId不能为空',
+            'app_id.unique'  => 'AppId已经存在',
+            'app_secret.required'  => 'AppSecret不能为空',
+            'account_type.required'  => '请选择公众号类型',
         ];
     }
 }
