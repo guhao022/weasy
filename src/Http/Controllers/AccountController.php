@@ -3,8 +3,11 @@
 namespace Modules\Weasy\Controllers;
 
 use Modules\Weasy\Models\Accounts;
+use Modules\Weasy\Validation\Accounts\Create;
 
 class AccountController extends Controller {
+
+    protected $account;
 
     public function __construct()
     {
@@ -24,8 +27,12 @@ class AccountController extends Controller {
     }
 
     // 保存公众号
-    public function store() {
-        //
+    public function store(Create $request) {
+
+        $this->account->store($request);
+
+        return redirect(route('weasy.account.index'));
+
     }
 
     // 修改公众号信息
