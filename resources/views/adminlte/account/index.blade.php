@@ -24,35 +24,36 @@
                 <table class="table table-hover dataTable">
                     <thead class="thead">
                     <tr>
-                        <td>公众号名称</td>
-                        <td>微信号</td>
-                        <td>类型</td>
-                        <td>添加时间</td>
-                        <td>操作</td>
+                        <th>公众号名称</th>
+                        <th>微信号</th>
+                        <th>类型</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($accounts as $account)
-                    <tr id="tr_{{$account->name}}">
+                    <tr id="tr_{{$account->id}}">
+                        <td>{{$account->name}}</td>
                         <td>{{$account->wechat_account}}</td>
                         <td>
-                            @if($account->type == 1)
-                                订阅号
-                            @elseif($account->type == 2)
-                                服务号
+                            @if($account->account_type == 1)
+                                <span class="label label-success">订阅号</span>
+                            @elseif($account->account_type == 2)
+                                <span class="label label-primary">服务号</span>
                             @endif
 
                         </td>
                         <td>{{$account->created_at}}</td>
                         <td>
                             @if(admin_user()->can('weasy.account.update') || admin_user()->hasRole('admin'))
-                                <a href="{{ route('weasy.account.update', $admin->id) }}">
+                                <a href="{{ route('weasy.account.update', $account->id) }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             @endif
                             @if(admin_user()->can('weasy.account.destroy') || admin_user()->hasRole('admin'))
-                                <a href="javascript:void(0);" data-id="{{$admin->id}}" data-route="{{route('weasy.account.destroy')}}"class="grid-row-delete">
+                                <a href="javascript:void(0);" data-id="{{$account->id}}" data-route="{{route('weasy.account.destroy')}}"class="grid-row-delete">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             @endif
@@ -71,10 +72,7 @@
     <script type="text/javascript">
 
         $('.grid-row-delete').unbind('click').click(function() {
-            var id=$(this).data('id');
-            if (id == 1) {
-                alert('初始管理员不能删除');
-            }
+
             if(confirm("确认删除?")) {
                 $.ajax({
                     method: 'post',

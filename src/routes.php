@@ -13,8 +13,8 @@ Route::group([
         Route::group(['prefix' => 'account'], function (){
             Route::get('/', 'AccountController@index')->name('weasy.account.index');
             Route::get('create', 'AccountController@create')->name('weasy.account.create');
-            Route::post('store', 'AccountController@store')->name('weasy.account.store');
-            Route::get('edit/{id}', 'AccountController@edit')->name('weasy.account.update');
+            Route::post('create', 'AccountController@store')->name('weasy.account.create');
+            Route::get('update/{id}', 'AccountController@edit')->name('weasy.account.update');
             Route::put('update/{id}', 'AccountController@update')->name('weasy.account.update');
             Route::delete('destroy', 'AccountController@destroy')->name('weasy.account.destroy');
         });

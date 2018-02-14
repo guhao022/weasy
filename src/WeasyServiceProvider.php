@@ -51,16 +51,16 @@ class WeasyServiceProvider extends ServiceProvider
 
         $this->loadHelper();
 
+        $this->registerObserver();
+
+        $this->registerService();
+
         //
     }
 
     protected function loadHelper()
     {
         require_once __DIR__.'/helper.php';
-    }
-
-    protected function loadObserver() {
-        Accounts::observe('Modules\Weasy\Observers\AccountObserver');
     }
 
     /**
@@ -70,7 +70,12 @@ class WeasyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerAccountService();
+        //
+    }
+
+    protected function registerObserver()
+    {
+        Accounts::observe('Modules\Weasy\Observers\AccountObserver');
     }
 
     /**
@@ -78,7 +83,7 @@ class WeasyServiceProvider extends ServiceProvider
      *
      * @return AccountService
      */
-    protected function registerAccountService()
+    protected function registerService()
     {
         $this->app->singleton('weasy.account_service', function () {
             return new AccountService();

@@ -64,7 +64,7 @@ class AccountRepository
      * @param int   $id
      * @param array $input
      */
-    public function update($id, $input)
+    public function update($input, $id)
     {
         $model = $this->model->find($id);
 

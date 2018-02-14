@@ -5,6 +5,7 @@ namespace Modules\Weasy\Controllers;
 use Modules\Weasy\Models\Accounts;
 use Modules\Weasy\Repositories\AccountRepository;
 use Modules\Weasy\Validation\Accounts\Create;
+use Modules\Weasy\Validation\Accounts\Update;
 
 class AccountController extends Controller {
 
@@ -34,18 +35,23 @@ class AccountController extends Controller {
 
         $this->account->store($request);
 
-        return redirect(route('weasy.account.index'));
+        return redirect(route('weasy.account.index'))->with('message', '新增公众号 成功');
 
     }
 
     // 修改公众号信息
     public function edit($id) {
-        //
+
+        $account = Accounts::find($id);
+
+        return weasy_view('account.edit', ['account' => $account]);
     }
 
     // 更新公众号信息
-    public function update($id) {
-        //
+    public function update(Update $request, $id) {
+        $this->account->update($request, $id);
+
+        return redirect(route('weasy.account.index'));
     }
 
     // 删除公众号
