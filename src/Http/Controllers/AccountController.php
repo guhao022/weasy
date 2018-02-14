@@ -15,16 +15,12 @@ class AccountController extends Controller {
     public function index() {
         $accounts = Accounts::all();
 
-        if (empty($accounts)) {
-            echo 123;die;
-        }
-
-        return weasy_view('account.index');
+        return weasy_view('account.index', ['accounts' => $accounts]);
     }
 
     // 添加公众号
     public function create() {
-        //
+        return weasy_view('account.create');
     }
 
     // 保存公众号

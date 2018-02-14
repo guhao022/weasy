@@ -14,14 +14,14 @@
 
                 </div>
 
-                {{--<div class="btn-group">
-                    <a href="{{ route('weasy.mp.create') }}" class="btn btn-sm btn-success">
+                <div class="btn-group">
+                    <a href="{{ route('weasy.account.create') }}" class="btn btn-sm btn-success">
                         <i class="fa fa-save"></i>&nbsp;&nbsp;新增
                     </a>
-                </div>--}}
+                </div>
             </div>
             <div class="box-body table-responsive ">
-                <table class="table table-hover dataTable" data-nosort="1,6">
+                <table class="table table-hover dataTable">
                     <thead class="thead">
                     <tr>
                         <td>公众号名称</td>
@@ -69,27 +69,6 @@
 @section('scripts')
 
     <script type="text/javascript">
-
-        $('.dataTable').dataTable( {
-
-            "oLanguage": {
-                "sLengthMenu": "每页显示 _MENU_ 条记录",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "没有数据",
-                "sSearch": "搜索:",
-                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-                "sLoadingRecords": "载入中...",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "前一页",
-                    "sNext": "后一页",
-                    "sLast": "尾页"
-                },
-                "sZeroRecords": "没有检索到数据",
-            },
-            "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "所有"]],
-            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 5 ] }]
-        } );
 
         $('.grid-row-delete').unbind('click').click(function() {
             var id=$(this).data('id');
