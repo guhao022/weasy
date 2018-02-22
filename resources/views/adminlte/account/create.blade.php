@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <form class="form-horizontal" method="POST" action="{{ route('weasy.account.store') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('weasy.account.create') }}">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="form-group">

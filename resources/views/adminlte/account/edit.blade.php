@@ -43,7 +43,7 @@
                     <div class="form-group ">
                         <label for="original_id" class="col-sm-2 control-label">公众号原始Id</label>
                         <div class="col-sm-6">
-                            <input class="form-control" value="{{ $account->original_id }}" placeholder="请认真填写，错了不能修改。例如gh_gks84hksi90o" name="original_id" type="text" id="original_id" />
+                            <input class="form-control" readonly value="{{ $account->original_id }}" placeholder="请认真填写，错了不能修改。例如gh_gks84hksi90o" name="original_id" type="text" id="original_id" />
                             @if ($errors->has('original_id'))
                                 <span class="help-block text-red">
                                     <p><i class="fa fa-info-circle"></i> {{ $errors->first('original_id') }}</p>

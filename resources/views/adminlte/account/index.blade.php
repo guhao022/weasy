@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="box-body table-responsive ">
-                <table class="table table-hover dataTable">
+                <table class="table table-hover table-bordered dataTable">
                     <thead class="thead">
                     <tr>
                         <th>公众号名称</th>
