@@ -8,6 +8,7 @@
 
 namespace Modules\Weasy\Controllers;
 
+use Modules\Weasy\Models\Menus;
 use Modules\Weasy\Repositories\MenusRepository;
 
 class MenusController extends Controller
@@ -26,7 +27,9 @@ class MenusController extends Controller
      */
     public function index() {
 
-        return weasy_view('menus.index');
+        $menus = Menus::all();
+
+        return weasy_view('menus.index', ['menus'=>$menus]);
     }
 
 }

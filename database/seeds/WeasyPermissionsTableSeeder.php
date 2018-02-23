@@ -89,10 +89,10 @@ class WeasyPermissionsTableSeeder extends Seeder
             [
                 'id'=>1007,
                 'name'=>'weasy.menu.index',
-                'display_name'=>'功能',
+                'display_name'=>'自定义菜单',
                 'icon' => '',
                 'is_menu' => '0',
-                'group_name'=>'func',
+                'group_name'=>'menu',
                 'mod_name' => 'weasy',
                 'pid'=>1006
             ],

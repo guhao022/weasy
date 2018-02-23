@@ -12,7 +12,7 @@ class Menus extends Model
         //
     }
 
-    protected $table = "weasy_menus";
+    protected $table = "weasy_wx_menus";
 
     protected $hidden = ['created_at', 'deleted_at' , 'updated_at'];
 
