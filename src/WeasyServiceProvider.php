@@ -63,16 +63,6 @@ class WeasyServiceProvider extends ServiceProvider
         require_once __DIR__.'/helper.php';
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
     protected function registerObserver()
     {
         Accounts::observe('Modules\Weasy\Observers\AccountObserver');
@@ -88,6 +78,20 @@ class WeasyServiceProvider extends ServiceProvider
         $this->app->singleton('weasy.account_service', function () {
             return new AccountService();
         });
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerRouteMiddleware();
+    }
+
+    protected function registerRouteMiddleware() {
+        app('router')->aliasMiddleware('account', \Modules\Weasy\Middleware\AccountMiddleware::class);
     }
 
 
