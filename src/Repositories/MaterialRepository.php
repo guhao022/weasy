@@ -2,7 +2,7 @@
 
 namespace Modules\Weasy\Repositories;
 
-use App\Models\Material;
+use Modules\Weasy\Models\Material;
 
 class MaterialRepository
 {
@@ -11,7 +11,7 @@ class MaterialRepository
     /**
      * model.
      *
-     * @var App\Models\Material
+     * @var \Modules\Weasy\Models\Material
      */
     private $model;
 
@@ -58,7 +58,7 @@ class MaterialRepository
      *
      * @param int $id 素材ID
      *
-     * @return App\Models\Material|NULL
+     * @return Modules\Weasy\Models\Material|NULL
      */
     public function getMediaById($id)
     {
@@ -70,7 +70,7 @@ class MaterialRepository
      *
      * @param string $mediaId 素材标识
      *
-     * @return App\Models\Material|NULL
+     * @return Modules\Weasy\Models\Material|NULL
      */
     public function getMaterialByMediaId($mediaId)
     {
@@ -454,10 +454,10 @@ class MaterialRepository
     /**
      * 保存 [针对于字段名称不统一].
      *
-     * @param App\Models\Material $material 模型
+     * @param Modules\Weasy\Models\Material $material 模型
      * @param array               $input    图文数据
      *
-     * @return App\Models\Material
+     * @return Modules\Weasy\Models\Material
      */
     private function savePost($input)
     {
@@ -493,14 +493,14 @@ class MaterialRepository
     /**
      * fillSavePost.
      *
-     * @param App\Models\Material $material model
+     * @param Modules\Weasy\Models\Material $material model
      * @param array               $input    数据
      */
-    private function fillSavePost($article, $input)
+    private function fillSavePost($material, $input)
     {
-        $account->fill($input);
+        $material->fill($input);
 
-        return $account->save();
+        return $material->save();
     }
 
     /**

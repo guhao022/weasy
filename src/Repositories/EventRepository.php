@@ -2,8 +2,8 @@
 
 namespace Modules\Weasy\Repositories;
 
+use Modules\Weasy\Models\Event;
 use Modules\Weasy\Services\Account as AccountService;
-use App\Models\Event;
 
 /**
  * Event Repository.

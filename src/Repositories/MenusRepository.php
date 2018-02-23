@@ -25,7 +25,8 @@ class MenusRepository
      * @var MaterialRepository
      */
     protected $materialRepository;
-    public function __construct(Menus $menus)
+
+    public function __construct(Menus $menus, EventRepository $eventRepository, MaterialRepository $materialRepository)
     {
         $this->menus = $menus;
     }
