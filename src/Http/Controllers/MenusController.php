@@ -8,16 +8,25 @@
 
 namespace Modules\Weasy\Controllers;
 
-class MenusController extends Controller {
+use Modules\Weasy\Repositories\MenusRepository;
 
-    public function __construct()
+class MenusController extends Controller
+{
+
+    private $menuRepository;
+
+    public function __construct(MenusRepository $menuRepository)
     {
-        parent::__construct();
+        $this->menuRepository = $menuRepository;
     }
 
+    /**
+     * @name 菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
 
-        return weasy_view('index');
+        return weasy_view('menus.index');
     }
 
 }

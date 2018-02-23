@@ -19,6 +19,10 @@ Route::group([
             Route::delete('destroy', 'AccountController@destroy')->name('weasy.account.destroy');
         });
 
+        Route::group(['prefix' => 'menu'], function (){
+            Route::get('/', 'MenusController@index')->name('weasy.menu.index');
+        });
+
     });
 
 

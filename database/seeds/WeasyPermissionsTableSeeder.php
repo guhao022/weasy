@@ -76,6 +76,26 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'mod_name' => 'weasy',
                 'pid'=>1002
             ],
+            [
+                'id'=>1006,
+                'name'=>'weasy.func',
+                'display_name'=>'功能',
+                'icon' => 'fa-th',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1000
+            ],
+            [
+                'id'=>1007,
+                'name'=>'weasy.menu.index',
+                'display_name'=>'功能',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1006
+            ],
         ];
 
         foreach($permissions as $permission){

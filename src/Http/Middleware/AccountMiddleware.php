@@ -43,7 +43,7 @@ class AccountMiddleware
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect(admin_url('weasy/account'));
+                return redirect(route('weasy.account.index'));
             }
         }
 
