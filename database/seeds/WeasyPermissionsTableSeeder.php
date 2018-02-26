@@ -81,7 +81,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'name'=>'weasy.func',
                 'display_name'=>'功能',
                 'icon' => 'fa-th',
-                'is_menu' => '0',
+                'is_menu' => '1',
                 'group_name'=>'func',
                 'mod_name' => 'weasy',
                 'pid'=>1000
@@ -91,10 +91,40 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'name'=>'weasy.menu.index',
                 'display_name'=>'自定义菜单',
                 'icon' => '',
-                'is_menu' => '0',
-                'group_name'=>'menu',
+                'is_menu' => '1',
+                'group_name'=>'func',
                 'mod_name' => 'weasy',
                 'pid'=>1006
+            ],
+            [
+                'id'=>1008,
+                'name'=>'weasy.menu.store',
+                'display_name'=>'新建菜单',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1007
+            ],
+            [
+                'id'=>1009,
+                'name'=>'weasy.menu.update',
+                'display_name'=>'修改菜单',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1007
+            ],
+            [
+                'id'=>1010,
+                'name'=>'weasy.menu.destroy',
+                'display_name'=>'修改菜单',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1007
             ],
         ];
 

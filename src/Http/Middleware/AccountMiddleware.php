@@ -43,7 +43,7 @@ class AccountMiddleware
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect(route('weasy.account.index'));
+                return redirect(route('weasy.account.index'))->with('error', '请选择公众号');
             }
         }
 

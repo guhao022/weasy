@@ -5,6 +5,10 @@
 
     <style type="text/css">
 
+        .menu-add-input {
+            padding: 10px 15px;
+        }
+
         .menu-add-input button {
             margin: 10px 0 0 10px;
         }
@@ -59,8 +63,8 @@
                 <h3 class="box-title">自定义菜单</h3>
 
                 <div class="box-tools pull-right">
-                    <button type="button" class="add-menu btn btn-xs btn-info" data-toggle="modal" data-target="#modal-add-menu">
-                        <i class="fa fa-plus"></i> &nbsp;添加
+                    <button type="button" class="add-menu btn btn-sm btn-info">
+                        <i class="fa fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -71,7 +75,7 @@
 
                         <div class="menu spacious">
                             <p>尚未配置菜单</p>
-                            <a href="javascript:;" data-toggle="modal" data-target="#modal-add-menu" class="add-menu text-green">点此立即创建</a>
+                            <a href="javascript:;" class="add-menu text-green">点此立即创建</a>
                         </div>
 
                     @else
@@ -98,7 +102,7 @@
 
     </div>
 
-    {{--<div class="col-lg-8 col-md-6 col-sm-6">
+    <div class="col-lg-8 col-md-6 col-sm-6">
 
         <div class="box box-info">
             <div class="box-header with-border">
@@ -118,35 +122,6 @@
 
         </div>
 
-    </div>--}}
-
-
-
-
-
-    <div class="modal fade" id="modal-add-menu">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">新增菜单</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="name">菜单名称</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="字数不多于4个汉字或8个字母">
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 
@@ -155,6 +130,75 @@
 
     <script type="text/javascript">
 
+        $('.add-menu').click(function () {
+
+            if ($('.menu-item-heading').length >= 3) {
+                alert('最多可以创建三个一级菜单');
+                return;
+            }
+
+            $('.menu-add-input').remove();
+            $('.menu.spacious').hide();
+
+            var item_html = '<div class="menu-add-input">';
+            item_html += '<input type="text" minlength="1" maxlength="3" id="add_menu" class="form-control">';
+            item_html += '<div class="pull-right">';
+            item_html += '<button onclick="add_menu()" class="btn btn-info btn-xs btn-flat submit-o">保存</button>';
+            item_html += '<button onclick="cancel_add()" class="btn btn-danger btn-xs btn-flat cancel-o">取消</button>';
+            item_html += '</div><div class="clearfix"></div> </div>';
+
+            $('.menu-item').append(item_html)
+            $('#add_menu').focus()
+        })
+
+        function add_menu() {
+
+            if ($('.menu-item-heading').length >= 3) {
+                alert('最多可以创建三个一级菜单');
+            }
+
+            var name = $("#add_menu").val();
+
+            var _menu_html = '<li class="menu-item-heading">';
+            _menu_html += '<span class="menu-item-name">'+ name +'</span>';
+            _menu_html += '<div class="actions pull-right">';
+            _menu_html += '<a href="javascript:;" class="edit" title="修改菜单"><i class="fa fa-edit"></i></a>';
+            _menu_html += '<a href="javascript:;" class="add-sub" title="新增子菜单"><i class="fa fa-plus-square-o"></i></a>';
+            _menu_html += '<a href="javascript:;" class="trash" title="删除菜单"><i class="fa fa-trash-o"></i></a>';
+            _menu_html += '</div> </li>';
+
+            $('.menu-add-input').remove();
+            $('.menu-item').append(_menu_html)
+
+            /*$.ajax({
+                type: 'POST',
+                url: '',
+                data: {
+                    name: name
+                },
+                dataType:'json',
+                success:function(data){
+                    $('.menu-add-input').remove();
+                },
+            })*/
+        }
+
+        function cancel_add() {
+
+            $('.menu-add-input').remove();
+
+            var m_num = $('.menu-item-heading').length;
+
+            if (m_num == 0) $('.menu.spacious').show();
+        }
+
+        $(function () {
+            $('#add_menu').keyup(function () {
+                if($('#add_menu').val().length > 3) {
+
+                }
+            })
+        })
 
 
     </script>

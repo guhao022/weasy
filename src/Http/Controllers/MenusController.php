@@ -10,6 +10,7 @@ namespace Modules\Weasy\Controllers;
 
 use Modules\Weasy\Models\Menus;
 use Modules\Weasy\Repositories\MenusRepository;
+use Modules\Weasy\Validation\Menus\Create;
 
 class MenusController extends Controller
 {
@@ -30,6 +31,22 @@ class MenusController extends Controller
         $menus = Menus::all();
 
         return weasy_view('menus.index', ['menus'=>$menus]);
+    }
+
+    public function store(Create $request) {
+        //
+    }
+
+    public function edit($id) {
+        //
+    }
+
+    public function update($id) {
+        //
+    }
+
+    public function destroy() {
+        //
     }
 
 }
