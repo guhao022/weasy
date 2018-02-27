@@ -177,7 +177,7 @@ class MenusRepository
      */
     public function store($input)
     {
-        return $this->savePost(new $this->model(), $input);
+        return $this->savePost(new $this->menus(), $input);
     }
 
     /**
@@ -191,6 +191,7 @@ class MenusRepository
     public function savePost($menu, $input)
     {
         $menu->fill($input);
+
         $menu->save();
 
         return $menu;

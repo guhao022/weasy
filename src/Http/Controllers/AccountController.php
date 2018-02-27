@@ -2,6 +2,7 @@
 
 namespace Modules\Weasy\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Weasy\Models\Accounts;
 use Modules\Weasy\Repositories\AccountRepository;
 use Modules\Weasy\Validation\Accounts\Create;
@@ -55,8 +56,17 @@ class AccountController extends Controller {
     }
 
     // 删除公众号
-    public function destroy() {
-        //
+    public function destroy(Request $request) {
+
+        $ids = $request->ids;
+
+        $delete =  Accounts::destroy($ids);
+
+        if ($delete) {
+            return response()->json(['status'=>true, 'message'=>'删除成功']);
+        } else {
+            return response()->json(['status'=>false, 'message'=>'删除失败']);
+        }
     }
 
     // 切换公众号

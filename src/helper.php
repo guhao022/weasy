@@ -27,3 +27,15 @@ if (! function_exists('account')) {
         return app('weasy.account_service');
     }
 }
+
+if (!function_exists('make_api_url'))
+{
+    /**
+     * @param $tag
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    function make_api_url($tag)
+    {
+        return url('/api?t='.$tag);
+    }
+}

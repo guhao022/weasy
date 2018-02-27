@@ -34,7 +34,12 @@ class MenusController extends Controller
     }
 
     public function store(Create $request) {
-        //
+
+        $input = $request->all();
+
+        $input->
+
+        $this->menuRepository->store($request->all());
     }
 
     public function edit($id) {

@@ -132,18 +132,23 @@
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">新增菜单</h4>
                 </div>
-                <div class="modal-body">
+                <form action="{{ route('weasy.menu.store') }}" method="post">
+                    <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="name">菜单名称</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="字数不多于4个汉字或8个字母">
+                        {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <label for="name">菜单名称</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="字数不多于4个汉字或8个字母">
+                        </div>
+
                     </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary submit-o">提交</button>
+                    </div>
+                </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
-                </div>
             </div>
 
         </div>
@@ -154,9 +159,7 @@
 @section('scripts')
 
     <script type="text/javascript">
-
-
-
+        //
     </script>
 
 @stop

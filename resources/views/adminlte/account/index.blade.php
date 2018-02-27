@@ -52,13 +52,39 @@
                             @if(admin_user()->can('weasy.account.update') || admin_user()->hasRole('admin'))
                                 <a href="{{ route('weasy.account.update', $account->id) }}" class="btn btn-default btn-xs btn-flat">编辑</a>
                             @endif
-                            <a href="#api_view" class="btn btn-success btn-xs btn-flat" data-toggle="modal">接口</a>
+                            <a href="#api_{{ $account->id }}" class="btn btn-success btn-xs btn-flat" data-toggle="modal">接口</a>
                             @if(admin_user()->can('weasy.account.destroy') || admin_user()->hasRole('admin'))
                                 <a href="javascript:void(0);" class="grid-row-delete btn btn-danger btn-xs btn-flat" data-id="{{$account->id}}" data-route="{{route('weasy.account.destroy')}}">删除</a>
                             @endif
                         </td>
 
                     </tr>
+
+
+
+                    <div class="modal fade" id="api_{{ $account->id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">
+                                        <i class="fa fa-check-circle-o text-orange"></i>
+                                        <b>请复制此处token和url到公众平台绑定</b>
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Url:</strong>&nbsp;&nbsp;&nbsp;{{ make_api_url($account->tag) }}</p>
+                                    <p><strong>Token:</strong>&nbsp;&nbsp;&nbsp;{{ $account->token }}</p>
+                                    <p><strong>EncodingAESKey:</strong>&nbsp;&nbsp;&nbsp;{{ $account->aes_key }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">确 定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @endforeach
                     </tbody>
                 </table>
@@ -68,24 +94,7 @@
 
 
 
-    <div class="modal fade" id="api_view">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Default Modal</h4>
-                </div>
-                <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 
@@ -95,12 +104,13 @@
     <script type="text/javascript">
 
         $('.grid-row-delete').unbind('click').click(function() {
-
+            var id=$(this).data('id');
             if(confirm("确认删除?")) {
                 $.ajax({
                     method: 'post',
                     url: $(this).data('route'),
                     data: {
+                        ids: id,
                         _method:'delete',
                         _token:WE.token,
                     },
