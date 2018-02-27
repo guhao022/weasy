@@ -17,7 +17,7 @@ Route::group([
             Route::get('update/{id}', 'AccountController@edit')->name('weasy.account.update');
             Route::put('update/{id}', 'AccountController@update')->name('weasy.account.update');
             Route::delete('destroy', 'AccountController@destroy')->name('weasy.account.destroy');
-            Route::post('chose/{id}', 'AccountController@chose')->name('weasy.account.chose');
+            Route::get('chose/{id}', 'AccountController@chose')->name('weasy.account.chose');
         });
 
         Route::group(['prefix' => 'menu', 'middleware' => 'account'], function (){

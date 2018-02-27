@@ -26,7 +26,6 @@ class CreateAccountsTable extends Migration
             $table->string('access_token',30)->nullable()->comment('微信access_token');
             $table->tinyInteger('account_type')->nullable()->default(1)->comment('类型，1订阅号2服务号');
             $table->tinyInteger('sync_status')->nullable()->default(0)->comment('同步状态 0 未同步 1 素材完成同步');
-            $table->boolean('active')->default(0)->comment('是否激活');
             $table->timestamps();
         });
     }

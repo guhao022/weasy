@@ -59,11 +59,10 @@ class AccountController extends Controller {
         //
     }
 
-    // 选择公众号
+    // 切换公众号
     public function chose($id) {
-        if (account()->chose($id)) {
-            return redirect(route('weasy.home'))->with('success', '切换公众号成功');
-        }
+        account()->chose($id);
+        return redirect()->route('weasy.home')->with('success', '切换公众号成功');
     }
 
 }
