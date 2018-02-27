@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="box-body table-responsive ">
-                <table class="table table-hover table-bordered dataTable">
+                <table class="table table-hover table-striped text-center">
                     <thead class="thead">
                     <tr>
                         <th>公众号名称</th>
@@ -46,19 +46,18 @@
 
                         </td>
                         <td>{{$account->created_at}}</td>
-                        <td>
-                            @if(admin_user()->can('weasy.account.update') || admin_user()->hasRole('admin'))
-                                <a href="{{ route('weasy.account.update', $account->id) }}">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            @endif
-                            @if(admin_user()->can('weasy.account.destroy') || admin_user()->hasRole('admin'))
-                                <a href="javascript:void(0);" data-id="{{$account->id}}" data-route="{{route('weasy.account.destroy')}}"class="grid-row-delete">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            @endif
 
+                        <td>
+                            <a href="{{ route('weasy.account.chose', $account->id) }}" class="btn btn-info btn-xs btn-flat">切换公众号</a>
+                            @if(admin_user()->can('weasy.account.update') || admin_user()->hasRole('admin'))
+                                <a href="{{ route('weasy.account.update', $account->id) }}" class="btn btn-default btn-xs btn-flat">编辑</a>
+                            @endif
+                            <a href="#api_view" class="btn btn-success btn-xs btn-flat" data-toggle="modal">接口</a>
+                            @if(admin_user()->can('weasy.account.destroy') || admin_user()->hasRole('admin'))
+                                <a href="javascript:void(0);" class="grid-row-delete btn btn-danger btn-xs btn-flat" data-id="{{$account->id}}" data-route="{{route('weasy.account.destroy')}}">删除</a>
+                            @endif
                         </td>
+
                     </tr>
                     @endforeach
                     </tbody>
@@ -66,6 +65,30 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="api_view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Default Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 @stop
 @section('scripts')
 
