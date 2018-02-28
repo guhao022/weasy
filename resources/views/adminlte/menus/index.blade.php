@@ -67,27 +67,63 @@
             <div class="box-body no-padding">
                 <ul class="nav nav-stacked menu-item">
 
-                    @if(isset($menus))
+                    @if(empty($menus))
 
                         <div class="menu spacious">
                             <p>尚未配置菜单</p>
-                            <a href="javascript:;" data-toggle="modal" data-target="#modal-add-menu" class="add-menu text-green">点此立即创建</a>
+                            <a href="#modal-add-menu" data-toggle="modal" class="add-menu text-green">点此立即创建</a>
                         </div>
 
                     @else
 
-                        <li class="menu-item-heading">
+                        @foreach($menus as $menu)
 
-                            <span class="menu-item-name">菜单</span>
+                            <li class="menu-item-heading" data-id="{{ $menu->id }}">
 
-                            <div class="actions pull-right">
-                                <a href="javascript:;" class="edit" title="修改菜单"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:;" class="add-sub" title="新增子菜单"><i class="fa fa-plus-square-o"></i></a>
-                                <a href="javascript:;" class="trash" title="删除菜单"><i class="fa fa-trash-o"></i></a>
-                            </div>
+                                <span class="menu-item-name">{{ $menu->name }}</span>
+
+                                <div class="actions pull-right">
+                                    <a href="#modal-edit-menu-{{ $menu->id }}" data-toggle="modal" class="edit" title="修改菜单"><i class="fa fa-edit"></i></a>
+                                    <a href="javascript:;" data-id="{{ $menu->id }}" class="add-sub" title="新增子菜单"><i class="fa fa-plus-square-o"></i></a>
+                                    <a href="javascript:;" data-id="{{ $menu->id }}" class="trash" title="删除菜单"><i class="fa fa-trash-o"></i></a>
+                                </div>
 
 
-                        </li>
+                                <div class="modal fade" id="modal-edit-menu-{{ $menu->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">修改菜单-【{{ $menu->name }}】</h4>
+                                            </div>
+                                            <form action="{{ route('weasy.menu.update', $menu->id) }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label for="name">菜单名称</label>
+                                                        <input type="hidden" name="pid" value="0">
+                                                        <input type="text" class="form-control" name="name" id="name" value="{{ $menu->name }}" placeholder="字数不多于4个汉字或8个字母">
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                                                    <button type="submit" class="btn btn-primary">提交</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </li>
+
+                        @endforeach
+
                     @endif
 
                 </ul>
@@ -98,11 +134,11 @@
 
     </div>
 
-    {{--<div class="col-lg-8 col-md-6 col-sm-6">
+    <div class="col-lg-8 col-md-6 col-sm-6">
 
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">自定义菜单</h3>
+                <h3 class="box-title menu-name">自定义菜单</h3>
 
                 <div class="box-tools pull-right">
 
@@ -118,7 +154,7 @@
 
         </div>
 
-    </div>--}}
+    </div>
 
 
 
@@ -133,12 +169,12 @@
                     <h4 class="modal-title">新增菜单</h4>
                 </div>
                 <form action="{{ route('weasy.menu.store') }}" method="post">
+                    {{ csrf_field() }}
                     <div class="modal-body">
-
-                        {{ csrf_field() }}
 
                         <div class="form-group">
                             <label for="name">菜单名称</label>
+                            <input type="hidden" name="pid" value="0">
                             <input type="text" class="form-control" name="name" id="name" placeholder="字数不多于4个汉字或8个字母">
                         </div>
 
@@ -148,7 +184,6 @@
                         <button type="submit" class="btn btn-primary submit-o">提交</button>
                     </div>
                 </form>
-
             </div>
 
         </div>
@@ -159,7 +194,9 @@
 @section('scripts')
 
     <script type="text/javascript">
-        //
+        $('.menu-item-heading').click(function () {
+            var id = $(this).data('id')
+        })
     </script>
 
 @stop

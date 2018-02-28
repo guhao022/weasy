@@ -28,7 +28,11 @@ class MenusController extends Controller
      */
     public function index() {
 
-        $menus = Menus::all();
+        $account_id = account()->chosedId();
+
+        $menus = Menus::where('account_id', $account_id)->get();
+
+        $menus = tree($menus);
 
         return weasy_view('menus.index', ['menus'=>$menus]);
     }
@@ -37,17 +41,16 @@ class MenusController extends Controller
 
         $input = $request->all();
 
-        $input->
+        $input['account_id'] = account()->chosedId();
 
-        $this->menuRepository->store($request->all());
-    }
+        $this->menuRepository->store($input);
 
-    public function edit($id) {
-        //
+        return redirect()->route('weasy.menu.index');
     }
 
     public function update($id) {
-        //
+
+        //$this->menuRepository->
     }
 
     public function destroy() {

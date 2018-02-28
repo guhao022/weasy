@@ -119,7 +119,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             [
                 'id'=>1010,
                 'name'=>'weasy.menu.destroy',
-                'display_name'=>'修改菜单',
+                'display_name'=>'删除菜单',
                 'icon' => '',
                 'is_menu' => '0',
                 'group_name'=>'func',

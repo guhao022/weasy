@@ -1,5 +1,27 @@
 <?php
 
+/**
+ * get tree
+ *
+ * @param $table
+ * @param string $pid
+ * @return array
+ */
+function tree($table, $pid='0') {
+    $tree = array();
+    foreach($table as $row){
+        if($row['pid']==$pid){
+            $tmp = tree($table,$row['id']);
+            if($tmp){
+                $row['children']=$tmp;
+            }else{
+                $row['leaf'] = true;
+            }
+            $tree[]=$row;
+        }
+    }
+    return $tree;
+}
 
 if (! function_exists('weasy_view')) {
     /**

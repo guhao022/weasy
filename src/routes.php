@@ -23,7 +23,6 @@ Route::group([
         Route::group(['prefix' => 'menu', 'middleware' => 'account'], function (){
             Route::get('/', 'MenusController@index')->name('weasy.menu.index');
             Route::post('store', 'MenusController@store')->name('weasy.menu.store');
-            Route::get('update/{id}', 'MenusController@edit')->name('weasy.menu.update');
             Route::put('update/{id}', 'MenusController@update')->name('weasy.menu.update');
             Route::delete('destroy', 'MenusController@destroy')->name('weasy.menu.destroy');
         });

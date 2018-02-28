@@ -16,7 +16,7 @@ class CreateWxMenusTable extends Migration
         Schema::create('weasy_wx_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->comment('所属公众号');
-            $table->integer('parent_id')->nullable()->default(0)->comment('菜单父id');
+            $table->integer('pid')->nullable()->default(0)->comment('菜单父id');
             $table->string('name', 30)->comment('菜单名称');
             $table->enum('type', [
                 'click',
