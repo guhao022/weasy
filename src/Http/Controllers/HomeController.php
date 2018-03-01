@@ -8,6 +8,8 @@
 
 namespace Modules\Weasy\Controllers;
 
+use Modules\Weasy\Models\Accounts;
+
 class HomeController extends Controller {
 
     public function __construct()
@@ -17,7 +19,9 @@ class HomeController extends Controller {
 
     public function index() {
 
-        return weasy_view('index');
+        $accounts = Accounts::all();
+
+        return weasy_view('index', ['accounts'=>$accounts]);
     }
 
 }

@@ -14,7 +14,7 @@ class MenusRepository
     /**
      * @var Menus
      */
-    protected $menus;
+    protected $menu;
 
     /**
      * @var EventRepository
@@ -26,9 +26,9 @@ class MenusRepository
      */
     protected $materialRepository;
 
-    public function __construct(Menus $menus, EventRepository $eventRepository, MaterialRepository $materialRepository)
+    public function __construct(Menus $menu, EventRepository $eventRepository, MaterialRepository $materialRepository)
     {
-        $this->menus = $menus;
+        $this->menu = $menu;
     }
 
     /**
@@ -38,7 +38,7 @@ class MenusRepository
      */
     public function lists($accountId)
     {
-        return $this->model->with('subButtons')->where('account_id', $accountId)->where('parent_id', 0)->orderBy('id', 'asc')->get();
+        return $this->menu->with('subButtons')->where('account_id', $accountId)->where('pid', 0)->orderBy('id', 'asc')->get();
     }
 
     /**
@@ -48,7 +48,7 @@ class MenusRepository
      */
     public function all($accountId)
     {
-        return $this->model->where('account_id', $accountId)->get()->toArray();
+        return $this->menu->where('account_id', $accountId)->get()->toArray();
     }
 
     /**
@@ -67,7 +67,7 @@ class MenusRepository
 
             if (!empty($menu['sub_button'])) {
                 foreach ($menu['sub_button'] as $subKey => $subMenu) {
-                    $subMenu['parent_id'] = $parentId;
+                    $subMenu['pid'] = $parentId;
 
                     $subMenu['sort'] = $subKey;
 
@@ -86,7 +86,7 @@ class MenusRepository
      */
     public function store($input)
     {
-        return $this->savePost(new $this->menus(), $input);
+        return $this->savePost(new $this->menu(), $input);
     }
 
     /**
@@ -97,13 +97,13 @@ class MenusRepository
      *
      * @return \Modules\Weasy\Models\Menus
      */
-    public function savePost($menu, $input)
+    public function savePost($model, $input)
     {
-        $menu->fill($input);
+        $model->fill($input);
 
-        $menu->save();
+        $model->save();
 
-        return $menu;
+        return $model;
     }
 
 

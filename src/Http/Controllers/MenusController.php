@@ -8,6 +8,7 @@
 
 namespace Modules\Weasy\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Weasy\Models\Menus;
 use Modules\Weasy\Repositories\MenusRepository;
 use Modules\Weasy\Validation\Menus\Create;
@@ -30,9 +31,7 @@ class MenusController extends Controller
 
         $account_id = account()->chosedId();
 
-        $menus = Menus::where('account_id', $account_id)->get();
-
-        $menus = tree($menus);
+        $menus = $this->menuRepository->lists($account_id);
 
         return weasy_view('menus.index', ['menus'=>$menus]);
     }
@@ -53,8 +52,17 @@ class MenusController extends Controller
         //$this->menuRepository->
     }
 
-    public function destroy() {
-        //
+    public function destroy(Request $request) {
+
+        $ids = $request->ids;
+
+        $delete =  Menus::destroy($ids);
+
+        if ($delete) {
+            return response()->json(['status'=>true, 'message'=>'删除成功']);
+        } else {
+            return response()->json(['status'=>false, 'message'=>'删除失败']);
+        }
     }
 
 }

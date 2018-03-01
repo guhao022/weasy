@@ -45,10 +45,14 @@
         }
 
         .spacious{
-            padding: 100px 60px 120px;
             position: relative;
             text-align: center;
         }
+
+        .nmenu {
+            padding: 100px 60px 120px;
+        }
+
 
     </style>
 
@@ -146,8 +150,12 @@
             </div>
             <div class="box-body">
 
-                <div class="emenu spacious">
+                <div class="nmenu spacious" hidden>
                     <p>选择或创建一个菜单并设置响应内容</p>
+                </div>
+
+                <div class="emenu spacious">
+                    、、
                 </div>
 
             </div>
@@ -155,10 +163,6 @@
         </div>
 
     </div>
-
-
-
-
 
     <div class="modal fade" id="modal-add-menu">
         <div class="modal-dialog">
@@ -197,6 +201,35 @@
         $('.menu-item-heading').click(function () {
             var id = $(this).data('id')
         })
+
+
+
+        $('.trash').unbind('click').click(function() {
+            var id=$(this).data('id');
+            if(confirm("确认删除?")) {
+                $.ajax({
+                    method: 'post',
+                    url: '{{ route('weasy.menu.destroy') }}',
+                    data: {
+                        ids: id,
+                        _method:'delete',
+                        _token:WE.token,
+                    },
+                    success: function (data) {
+
+                        if (typeof data === 'object') {
+                            if (data.status) {
+                                $('#tr_'+id).remove();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
     </script>
 
 @stop

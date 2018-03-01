@@ -18,10 +18,75 @@
                 <div class="box-body">
                     @if(!account()->chosedId())
 
-                        <div style="padding: 100px 0;position: relative;text-align: center;">
+
+                        <table class="table table-hover table-striped text-center">
+                            <thead class="thead">
+                            <tr>
+                                <th>公众号名称</th>
+                                <th>微信号</th>
+                                <th>类型</th>
+                                <th>添加时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($accounts as $account)
+                                <tr id="tr_{{$account->id}}">
+                                    <td>{{$account->name}}</td>
+                                    <td>{{$account->wechat_account}}</td>
+                                    <td>
+                                        @if($account->account_type == 1)
+                                            <span class="label label-success">订阅号</span>
+                                        @elseif($account->account_type == 2)
+                                            <span class="label label-primary">服务号</span>
+                                        @endif
+
+                                    </td>
+                                    <td>{{$account->created_at}}</td>
+
+                                    <td>
+                                        <a href="{{ route('weasy.account.chose', $account->id) }}" class="btn btn-info btn-xs btn-flat">选择公众号</a>
+
+                                        <a href="#api_{{ $account->id }}" class="btn btn-success btn-xs btn-flat" data-toggle="modal">接口</a>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <div class="modal fade" id="api_{{ $account->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">
+                                                    <i class="fa fa-check-circle-o text-orange"></i>
+                                                    <b>请复制此处token和url到公众平台绑定</b>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><strong>Url:</strong>&nbsp;&nbsp;&nbsp;{{ make_api_url($account->tag) }}</p>
+                                                <p><strong>Token:</strong>&nbsp;&nbsp;&nbsp;{{ $account->token }}</p>
+                                                <p><strong>EncodingAESKey:</strong>&nbsp;&nbsp;&nbsp;{{ $account->aes_key }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">确 定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        {{--<div style="padding: 100px 0;position: relative;text-align: center;">
                             <p>未选择公众号</p>
                             <u><a href="{{ route('weasy.account.index') }}" class="text-aqua text-bold">点击前往选择公众号</a></u>
-                        </div>
+                        </div>--}}
 
                     @endif
                 </div>
