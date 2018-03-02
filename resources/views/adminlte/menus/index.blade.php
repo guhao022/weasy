@@ -153,7 +153,7 @@
                             <input class="" type="radio" name="menu-type" value="keys"> 关键字
                         </label>
 
-                        <label class="col-sm-5 font-noraml">
+                        <label class="col-sm-5">
                             <input class="" type="radio" name="menu-type" value="miniprogram"> 小程序
                         </label>
                         <!--<label class="col-xs-5 font-noraml">-->
@@ -175,6 +175,7 @@
 
 @stop
 @section('scripts')
+    <script src="{{ asset('packages/admin/layui/layui.all.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -191,6 +192,7 @@
              * 控件默认事件
              * @returns {undefined}
              */
+
             menu.prototype.listen = function () {
                 var self = this;
                 $('.mobile-footer').on('click', 'li a', function () {
@@ -379,7 +381,7 @@
                         });
                     }
                 });
-                console.log(data);return;
+
                 var data = (data == '')?'':data;
 
                 $.ajax({
@@ -387,9 +389,12 @@
                     type: "post",
                     data: {
                         _token: WE.token,
-                        data: data
+                        menus: data
                     },
-                })
+                    success: function (res) {
+                        //
+                    }
+                }, 'json');
 
             };
             new menu();

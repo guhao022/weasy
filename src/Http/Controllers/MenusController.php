@@ -40,7 +40,7 @@ class MenusController extends Controller
 
         $input = $request->all();
 
-        dd($input);
+        print_r($input);die;
 
         $input['account_id'] = account()->chosedId();
 
