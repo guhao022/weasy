@@ -22,5 +22,6 @@ class Create extends Validator
         return [
             'menus.required' => '菜单数据不能为空',
         ];
+
     }
 }
