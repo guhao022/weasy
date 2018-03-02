@@ -40,6 +40,8 @@ class MenusController extends Controller
 
         $input = $request->all();
 
+        dd($input);
+
         $input['account_id'] = account()->chosedId();
 
         $this->menuRepository->store($input);
