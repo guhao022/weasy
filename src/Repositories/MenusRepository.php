@@ -38,7 +38,7 @@ class MenusRepository
      */
     public function lists($accountId)
     {
-        return $this->menu->with('subButtons')->where('account_id', $accountId)->where('pid', 0)->orderBy('id', 'asc')->get();
+        return $this->menu->with('sub')->where('account_id', $accountId)->where('pid', 0)->orderBy('id', 'asc')->get();
     }
 
     /**
@@ -60,16 +60,14 @@ class MenusRepository
     public function storeMulti($accountId, $menus)
     {
         foreach ($menus as $key => $menu) {
-            $menu['sort'] = $key;
+
             $menu['account_id'] = $accountId;
 
             $parentId = $this->store($menu)->id;
 
-            if (!empty($menu['sub_button'])) {
-                foreach ($menu['sub_button'] as $subKey => $subMenu) {
+            if (!empty($menu['sub'])) {
+                foreach ($menu['sub'] as $subKey => $subMenu) {
                     $subMenu['pid'] = $parentId;
-
-                    $subMenu['sort'] = $subKey;
 
                     $subMenu['account_id'] = $accountId;
 
@@ -77,6 +75,22 @@ class MenusRepository
                 }
             }
         }
+    }
+
+    public function destroyMenu($accountId) {
+
+        $menus = $this->all($accountId);
+
+        array_map(function ($menu) {
+
+            if ($menu['type'] == 'click') {
+                $this->eventRepository->distoryByEventKey($menu['key']);
+            }
+
+        }, $menus);
+
+        $this->model->where('account_id', $accountId)->delete();
+
     }
 
     /**

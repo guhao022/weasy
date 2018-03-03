@@ -8,7 +8,7 @@
         .mobile-body{width:100%;position:absolute;bottom:0;top:60px;background-color: #FFF}
         .mobile-body iframe{width:100%;height:100%;background:#fff}
         .mobile-footer{list-style-type:none;margin:0;position:absolute;bottom:0;left:0;right:0;border-top:1px solid #e7e7eb;background:url("https://res.wx.qq.com/mpres/htmledition/images/bg/bg_mobile_foot_default3a7b38.png") no-repeat 0 0;padding-left:43px}
-        .mobile-footer li{width:33.33%;line-height:50px;position:relative;float:left;text-align:center}
+        .mobile-footer li{width:33.33%;line-height:44px;position:relative;float:left;text-align:center}
         .mobile-footer li a{display:block;border:1px solid rgba(255, 255, 255, 0);border-left:1px solid #e7e7eb;width:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;color:#616161;text-decoration:none}
         .mobile-footer li a.active{background-color:#fff;border:1px solid #44b549 !important}
         .mobile-footer .icon-add{background:url("https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/page/menu/index_z3a7b39.png") 0 0 no-repeat;width:14px;height:14px;vertical-align:middle;display:inline-block;margin-top:-2px;border-bottom:none !important}
@@ -35,32 +35,41 @@
 
     <div class="md-menu" style="margin-left: 20%;">
         <div class="mobile-preview pull-left">
-            <div class="mobile-header">测试公众号</div>
+            <div class="mobile-header">{{ $current_account->name }}</div>
             <div class="mobile-body"></div>
             <ul class="mobile-footer">
-                <li class="parent-menu" style="width: 50%;">
-                    <a class="active">
-                        <i class="icon-sub hide"></i>
-                        <span>一级菜单</span>
-                    </a>
-                    <div class="sub-menu text-center">
+
+
+                @foreach ($menus as $menu)
+                <li class="parent-menu">
+                    <a><i class="icon-sub hide"></i> <span data-type="{{$menu->type}}" data-key="{{$menu->key}}">{{$menu->name}}</span></a>
+                    <div class="sub-menu text-center hide">
                         <ul>
-                            <li class="menu-add">
-                                <a>
-                                    <i class="icon-add"></i>
-                                </a>
+                            @if(!empty($menu['sub']))
+                            @foreach ($menu->sub as $submenu)
+                            <li>
+                                <a class="bottom-border"><span data-type="{{ $submenu->type }}" data-key="{{$submenu->key}}">{{$submenu->name}}</span></a>
                             </li>
+                            @endforeach
+                            @endif
+                            <li class="menu-add"><a><i class="icon-add"></i></a></li>
                         </ul>
                         <i class="arrow arrow_out"></i>
                         <i class="arrow arrow_in"></i>
                     </div>
                 </li>
+                @endforeach
+
+
+
+
                 <li class="parent-menu menu-add" style="width: 50%;">
                     <a><i class="icon-add"></i></a>
                 </li>
             </ul>
         </div>
-        <div class="box box-solid" style="position:absolute">
+
+        <div class="pull-left" style="position:absolute">
             <div class="popover fade right up in menu-editor">
                 <div class="arrow"></div>
                 <h3 class="popover-title">
@@ -69,45 +78,11 @@
                     <a class="pull-right menu-delete">删除</a>
 
                 </h3>
-                <div class="popover-content menu-content">
-                    <form class="form-horizontal ">
-
-                        <div class="form-group">
-                            <label for="menu-name" class="col-sm-3 control-label">菜单名称</label>
-
-                            <div class="col-sm-9">
-                                <input type="text" name="menu-name" class="form-control" id="menu-name">
-                                <p class="help-block">字数不超过13个汉字或40个字母</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-top:30px">
-                            <label class="col-sm-3 control-label">菜单内容</label>
-                            <div class="col-sm-9">
-                                <!--<label class="col-xs-5 font-noraml">-->
-                                <!--<input class="cuci-radio" type="radio" name="menu-type" value="text"> 文字消息-->
-                                <!--</label>-->
-                                <label class="col-sm-5">
-                                    <input class="" type="radio" name="menu-type" value="keys"> 关键字
-                                </label>
-                                <label class="col-sm-5 ">
-                                    <input class="" type="radio" name="menu-type" value="view"> 跳转网页
-                                </label>
-                                <label class="col-sm-5 font-noraml">
-                                    <input class="" type="radio" name="menu-type" value="event"> 事件功能
-                                </label>
-                                <label class="col-sm-5 font-noraml">
-                                    <input class="" type="radio" name="menu-type" value="miniprogram"> 小程序
-                                </label>
-                                <!--<label class="col-xs-5 font-noraml">-->
-                                <!--<input class="cuci-radio" type="radio" name="menu-type" value="customservice"> 多客服-->
-                                <!--</label>-->
-                            </div>
-                        </div>
-                        <div class="form-group editor-content-input" style="margin-top:30px"></div>
-                    </form></div>
+                <div class="popover-content menu-content"></div>
             </div>
         </div>
+
+
         <div class="hide menu-editor-parent-tpl">
             <form class="form-horizontal">
                 <p>已添加子菜单，仅可设置菜单名称。</p>
@@ -165,6 +140,7 @@
                 <div class="form-group editor-content-input" style="margin-top:30px"></div>
             </form>
         </div>
+
         <div style="clear:both"></div>
         <div style="width:830px;padding-top:40px;text-align:center">
             <button class="btn btn-success menu-submit" >保存发布</button>
@@ -175,7 +151,6 @@
 
 @stop
 @section('scripts')
-    <script src="{{ asset('packages/admin/layui/layui.all.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -192,7 +167,6 @@
              * 控件默认事件
              * @returns {undefined}
              */
-
             menu.prototype.listen = function () {
                 var self = this;
                 $('.mobile-footer').on('click', 'li a', function () {
@@ -297,27 +271,27 @@
                     var type = $span.attr('data-type') || 'text';
                     $html.find('input[name="menu-type"]').on('click', function () {
                         $span.attr('data-type', this.value || 'text');
-                        var content = $span.data('content') || '';
+                        var key = $span.data('key') || '';
                         var type = this.value;
                         var html = function () {
                             switch (type) {
                                 case 'miniprogram':
                                     var tpl = '<div><div class="form-group"><label class="col-sm-3 control-label">appid</label><div class="col-sm-8"><input type="text" name="appid" required="" placeholder="appid" autocomplete="off" class="form-control" value=""></div></div><div class="form-group"><label class="col-sm-3 control-label">url</label><div class="col-sm-8"><input type="text" name="url" required=""  placeholder="url" autocomplete="off" class="form-control" value="/mp/mp/menu.html"></div></div><div class="form-group"><label class="col-sm-3 control-label">pagepath</label><div class="col-sm-8"><input type="text" name="pagepath" required=""  placeholder="pagepath" autocomplete="off" class="form-control" value="{pagepath}"></div></div></div>';
                                     var _appid = '', _pagepath = '', _url = '';
-                                    if (content.indexOf(',') > 0) {
-                                        _appid = content.split(',')[0] || '';
-                                        _url = content.split(',')[1] || '';
-                                        _pagepath = content.split(',')[2] || '';
+                                    if (key.indexOf(',') > 0) {
+                                        _appid = key.split(',')[0] || '';
+                                        _url = key.split(',')[1] || '';
+                                        _pagepath = key.split(',')[2] || '';
                                     }
                                     $span.data('appid', _appid), $span.data('url', _url), $span.data('pagepath', _pagepath);
                                     return tpl.replace('{appid}', _appid).replace('/mp/mp/menu.html', _url).replace('{pagepath}', _pagepath);
                                 case 'customservice':
                                 case 'text':
-                                    return '<div>回复内容<textarea style="resize:none;height:225px" name="content" class="form-control">{content}</textarea></div>'.replace('{content}', content);
+                                    return '<div>回复内容<textarea style="resize:none;height:225px" name="key" class="form-control">{key}</textarea></div>'.replace('{key}', key);
                                 case 'view':
-                                    return '<div class="form-group"><label class="col-sm-3 control-label">跳转地址</label><div class="col-sm-8"><input placeholder="请输入网址" class="form-control" name="content" value="{content}"></div></div>'.replace('{content}', content);
+                                    return '<div class="form-group"><label class="col-sm-3 control-label">跳转地址</label><div class="col-sm-8"><input placeholder="请输入网址" class="form-control" name="key" value="{key}"></div></div>'.replace('{key}', key);
                                 case 'keys':
-                                    return '<div class="form-group"><label class="col-sm-3 control-label">匹配内容</label><div class="col-sm-8"><textarea placeholder="请输入内容" rows="5" class="form-control" name="content">{content}</textarea></div></div>'.replace('{content}', content);
+                                    return '<div class="form-group"><label class="col-sm-3 control-label">匹配内容</label><div class="col-sm-8"><textarea placeholder="请输入内容" rows="5" class="form-control" name="key">{key}</textarea></div></div>'.replace('{key}', content);
                                 case 'event':
                                     var options = {
                                         'scancode_push': '扫码推事件',
@@ -326,13 +300,13 @@
                                         'pic_photo_or_album': '弹出拍照或者相册发图',
                                         'pic_weixin': '弹出微信相册发图器',
                                         'location_select': '弹出地理位置选择器'};
-                                    var select = [], tpl = '<div class="form-group" style="margin-bottom: auto;"><label class="col-sm-3 control-label"></label><div><label><input name="content" type="radio" {checked} value="{value}"> {title}</label></div></div>';
-                                    if (!(options[content] || false)) {
-                                        content = 'scancode_push';
-                                        $span.data('content', content);
+                                    var select = [], tpl = '<div class="form-group" style="margin-bottom: auto;"><label class="col-sm-3 control-label"></label><div><label><input name="key" type="radio" {checked} value="{value}"> {title}</label></div></div>';
+                                    if (!(options[key] || false)) {
+                                        key = 'scancode_push';
+                                        $span.data('key', key);
                                     }
                                     for (var i in options) {
-                                        select.push(tpl.replace('{value}', i).replace('{title}', options[i]).replace('{checked}', (i === content) ? 'checked' : ''));
+                                        select.push(tpl.replace('{value}', i).replace('{title}', options[i]).replace('{checked}', (i === key) ? 'checked' : ''));
                                     }
                                     return select.join('');
                             }
@@ -343,7 +317,7 @@
                             $span.data(this.name, $(this).val() || $(this).html());
                             // 如果是小程序，合并内容到span的content上
                             if (type === 'miniprogram') {
-                                $span.data('content', $span.data('appid') + ',' + $span.data('url') + ',' + $span.data('pagepath'));
+                                $span.data('key', $span.data('appid') + ',' + $span.data('url') + ',' + $span.data('pagepath'));
                             }
                         });
                         $('.editor-content-input').html($html);
@@ -360,25 +334,23 @@
                     var menudata = {};
                     menudata.name = $span.text();
                     menudata.type = $span.attr('data-type');
-                    menudata.content = $span.data('content') || '';
+                    menudata.key = $span.data('key') || '';
                     return menudata;
                 }
 
                 $('li.parent-menu').map(function (index, item) {
                     if (!$(item).hasClass('menu-add')) {
                         var menudata = getdata($(item).find('a:first span'));
-                        menudata.index = index + 1;
-                        menudata.pid = 0;
                         menudata.sub = [];
                         menudata.sort = index;
-                        data.push(menudata);
+
                         $(item).find('.sub-menu ul li:not(.menu-add) span').map(function (ii, span) {
                             var submenudata = getdata($(span));
-                            submenudata.index = (index + 1) + '' + (ii + 1);
-                            submenudata.pid = menudata.index;
                             submenudata.sort = ii;
-                            data.push(submenudata);
+                            menudata.sub.push(submenudata);
                         });
+                        data.push(menudata);
+
                     }
                 });
 
@@ -392,7 +364,13 @@
                         menus: data
                     },
                     success: function (res) {
-                        //
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                toastr.success(res.message);
+                            } else {
+                                toastr.error(res.message);
+                            }
+                        }
                     }
                 }, 'json');
 

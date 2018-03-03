@@ -10,6 +10,7 @@ namespace Modules\Weasy;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Weasy\Commands\WeasyCommand;
+use Illuminate\Support\Facades\View;
 use Modules\Weasy\Models\Accounts;
 use Modules\Weasy\Services\Account as AccountService;
 
@@ -88,10 +89,17 @@ class WeasyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerRouteMiddleware();
+
+        $this->registerComposers();
     }
 
     protected function registerRouteMiddleware() {
         app('router')->aliasMiddleware('account', \Modules\Weasy\Middleware\AccountMiddleware::class);
+    }
+
+    protected function registerComposers() {
+        // 使用类来指定视图组件
+        View::composer('weasy::*', 'Modules\Weasy\Composers\AccountComposer');
     }
 
 

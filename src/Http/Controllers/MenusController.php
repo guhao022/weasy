@@ -38,15 +38,15 @@ class MenusController extends Controller
 
     public function store(Create $request) {
 
-        $input = $request->all();
+        $account_id = account()->chosedId();
 
-        print_r($input);die;
+        $this->menuRepository->destroyMenu($account_id);
 
-        $input['account_id'] = account()->chosedId();
+        $input = $request->menus;
 
-        $this->menuRepository->store($input);
+        $this->menuRepository->storeMulti($account_id, $input);
 
-        return redirect()->route('weasy.menu.index');
+        return response()->json(['status'=>true, 'message'=>'添加菜单成功']);
     }
 
     public function update($id) {

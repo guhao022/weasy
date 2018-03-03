@@ -44,7 +44,7 @@ class Menus extends Model
         'sort' => '值',
     ];
 
-    public function subButtons()
+    public function sub()
     {
         return $this->hasMany('Modules\Weasy\Models\Menus', 'pid');
     }
