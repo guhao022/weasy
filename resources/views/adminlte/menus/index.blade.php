@@ -113,27 +113,23 @@
                 <div class="form-group" style="margin-top:30px">
                     <label class="col-sm-3 control-label">菜单内容</label>
                     <div class="col-sm-9">
-                        <!--<label class="col-xs-5 font-noraml">-->
-                        <!--<input class="cuci-radio" type="radio" name="menu-type" value="text"> 文字消息-->
-                        <!--</label>-->
+
                         <label class="col-sm-5 font-noraml">
-                            <input class="" type="radio" name="menu-type" value="event"> 事件功能
+                            <input class="" type="radio" name="type" value="event"> 事件功能
                         </label>
 
                         <label class="col-sm-5 ">
-                            <input class="" type="radio" name="menu-type" value="view"> 跳转网页
+                            <input class="" type="radio" name="type" value="view"> 跳转网页
                         </label>
 
                         <label class="col-sm-5">
-                            <input class="" type="radio" name="menu-type" value="keys"> 关键字
+                            <input class="" type="radio" name="type" value="keys"> 关键字
                         </label>
 
                         <label class="col-sm-5">
-                            <input class="" type="radio" name="menu-type" value="miniprogram"> 小程序
+                            <input class="" type="radio" name="type" value="miniprogram"> 小程序
                         </label>
-                        <!--<label class="col-xs-5 font-noraml">-->
-                        <!--<input class="cuci-radio" type="radio" name="menu-type" value="customservice"> 多客服-->
-                        <!--</label>-->
+
                     </div>
                 </div>
 
@@ -269,14 +265,14 @@
                     });
                     $('.menu-editor .menu-content').html($html);
                     var type = $span.attr('data-type') || 'text';
-                    $html.find('input[name="menu-type"]').on('click', function () {
+                    $html.find('input[name="type"]').on('click', function () {
                         $span.attr('data-type', this.value || 'text');
                         var key = $span.data('key') || '';
                         var type = this.value;
                         var html = function () {
                             switch (type) {
                                 case 'miniprogram':
-                                    var tpl = '<div><div class="form-group"><label class="col-sm-3 control-label">appid</label><div class="col-sm-8"><input type="text" name="appid" required="" placeholder="appid" autocomplete="off" class="form-control" value=""></div></div><div class="form-group"><label class="col-sm-3 control-label">url</label><div class="col-sm-8"><input type="text" name="url" required=""  placeholder="url" autocomplete="off" class="form-control" value="/mp/mp/menu.html"></div></div><div class="form-group"><label class="col-sm-3 control-label">pagepath</label><div class="col-sm-8"><input type="text" name="pagepath" required=""  placeholder="pagepath" autocomplete="off" class="form-control" value="{pagepath}"></div></div></div>';
+                                    var tpl = '<div><div class="form-group"><label class="col-sm-3 control-label">appid</label><div class="col-sm-8"><input type="text" name="appid" required="" placeholder="appid" autocomplete="off" class="form-control" value=""></div></div><div class="form-group"><label class="col-sm-3 control-label">url</label><div class="col-sm-8"><input type="text" name="url" required=""  placeholder="url" autocomplete="off" class="form-control" value=""></div></div><div class="form-group"><label class="col-sm-3 control-label">pagepath</label><div class="col-sm-8"><input type="text" name="pagepath" required=""  placeholder="pagepath" autocomplete="off" class="form-control" value="{pagepath}"></div></div></div>';
                                     var _appid = '', _pagepath = '', _url = '';
                                     if (key.indexOf(',') > 0) {
                                         _appid = key.split(',')[0] || '';
@@ -287,11 +283,11 @@
                                     return tpl.replace('{appid}', _appid).replace('/mp/mp/menu.html', _url).replace('{pagepath}', _pagepath);
                                 case 'customservice':
                                 case 'text':
-                                    return '<div>回复内容<textarea style="resize:none;height:225px" name="key" class="form-control">{key}</textarea></div>'.replace('{key}', key);
+                                    return '<div class="form-group"><label class="col-sm-3 control-label">回复内容</label><div class="col-sm-8"><textarea style="resize:none;height:225px" name="key" class="form-control">{key}</textarea></div></div>'.replace('{key}', key);
                                 case 'view':
                                     return '<div class="form-group"><label class="col-sm-3 control-label">跳转地址</label><div class="col-sm-8"><input placeholder="请输入网址" class="form-control" name="key" value="{key}"></div></div>'.replace('{key}', key);
                                 case 'keys':
-                                    return '<div class="form-group"><label class="col-sm-3 control-label">匹配内容</label><div class="col-sm-8"><textarea placeholder="请输入内容" rows="5" class="form-control" name="key">{key}</textarea></div></div>'.replace('{key}', content);
+                                    return '<div class="form-group"><label class="col-sm-3 control-label">匹配内容</label><div class="col-sm-8"><textarea placeholder="请输入内容" rows="5" class="form-control" name="key"></textarea></div></div>'.replace('{key}', key);
                                 case 'event':
                                     var options = {
                                         'scancode_push': '扫码推事件',

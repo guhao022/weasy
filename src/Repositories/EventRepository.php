@@ -47,9 +47,14 @@ class EventRepository
      *
      * @param string $eventId eventId
      */
-    public function distoryByEventKey($eventKey)
+    public function distoryByEventKey($eventKey = "")
     {
-        return $this->model->where('key', $eventKey)->delete();
+        if (!empty($eventKey)) {
+            return $this->model->where('key', $eventKey)->delete();
+        } else {
+            return true;
+        }
+
     }
 
     /**

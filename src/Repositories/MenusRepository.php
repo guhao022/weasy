@@ -83,13 +83,13 @@ class MenusRepository
 
         array_map(function ($menu) {
 
-            if ($menu['type'] == 'click') {
+            if ($menu['type'] == 'event' && !empty($menu['key'])) {
                 $this->eventRepository->distoryByEventKey($menu['key']);
             }
 
         }, $menus);
 
-        $this->model->where('account_id', $accountId)->delete();
+        $this->menu->where('account_id', $accountId)->delete();
 
     }
 

@@ -19,15 +19,17 @@ class CreateWxMenusTable extends Migration
             $table->integer('pid')->nullable()->default(0)->comment('菜单父id');
             $table->string('name', 30)->comment('菜单名称');
             $table->enum('type', [
-                'click',
+                'event',
                 'view',
+                'key',
+                'miniprogram',
                 'scancode_push',
                 'scancode_waitmsg',
                 'pic_sysphoto',
                 'pic_photo_or_album',
                 'pic_weixin',
                 'location_select',
-            ])->default('click')->comment('菜单类型');
+            ])->default('event')->comment('菜单类型');
             $table->string('key', 200)->nullable()->comment('菜单触发值');
             $table->tinyInteger('sort')->nullable()->default(0)->comment('排序');
             $table->timestamps();
