@@ -42,13 +42,13 @@
 
                 @foreach ($menus as $menu)
                 <li class="parent-menu">
-                    <a><i class="icon-sub hide"></i> <span data-type="{{$menu->type}}" data-key="{{$menu->key}}">{{$menu->name}}</span></a>
+                    <a data-id="{{$menu->id}}"><i class="icon-sub hide"></i> <span data-type="{{$menu->type}}" data-key="{{$menu->key}}">{{$menu->name}}</span></a>
                     <div class="sub-menu text-center hide">
                         <ul>
                             @if(!empty($menu['sub']))
                             @foreach ($menu->sub as $submenu)
                             <li>
-                                <a class="bottom-border"><span data-type="{{ $submenu->type }}" data-key="{{$submenu->key}}">{{$submenu->name}}</span></a>
+                                <a data-id="{{$submenu->id}}" class="bottom-border"><span data-type="{{ $submenu->type }}" data-key="{{$submenu->key}}">{{$submenu->name}}</span></a>
                             </li>
                             @endforeach
                             @endif
@@ -59,9 +59,6 @@
                     </div>
                 </li>
                 @endforeach
-
-
-
 
                 <li class="parent-menu menu-add" style="width: 50%;">
                     <a><i class="icon-add"></i></a>
@@ -75,7 +72,7 @@
                 <h3 class="popover-title">
                     菜单名称
 
-                    <a class="pull-right menu-delete">删除</a>
+                    <a href="javascript:;" class="pull-right menu-delete">删除</a>
 
                 </h3>
                 <div class="popover-content menu-content"></div>
@@ -123,7 +120,7 @@
                         </label>
 
                         <label class="col-sm-5">
-                            <input class="" type="radio" name="type" value="keys"> 关键字
+                            <input class="" type="radio" name="type" value="key"> 关键字
                         </label>
 
                         <label class="col-sm-5">
@@ -165,13 +162,43 @@
              */
             menu.prototype.listen = function () {
                 var self = this;
+
                 $('.mobile-footer').on('click', 'li a', function () {
                     self.$btn = $(this);
                     self.$btn.parent('li').hasClass('menu-add') ? self.add() : self.checkShow();
                 }).find('li:first a:first').trigger('click');
                 $('.menu-delete').on('click', function () {
                     if(confirm('确定删除吗？')) {
-                        self.del();
+
+                        var $id = $(self.$btn).data("id");
+
+                        if (typeof($id) == "undefined") {
+
+                            self.del();
+                        } else {
+
+                            $.ajax({
+                                method: 'post',
+                                url: '{{ route('weasy.menu.destroy') }}',
+                                data: {
+                                    ids: $id,
+                                    _method: 'delete',
+                                    _token: WE.token,
+                                },
+                                success: function (data) {
+
+                                    if (typeof data === 'object') {
+                                        if (data.status) {
+                                            self.del();
+                                            toastr.success(data.message);
+                                        } else {
+                                            toastr.error(data.message);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+
                     };
                 });
                 $('.menu-submit').on('click', function () {
@@ -286,7 +313,7 @@
                                     return '<div class="form-group"><label class="col-sm-3 control-label">回复内容</label><div class="col-sm-8"><textarea style="resize:none;height:225px" name="key" class="form-control">{key}</textarea></div></div>'.replace('{key}', key);
                                 case 'view':
                                     return '<div class="form-group"><label class="col-sm-3 control-label">跳转地址</label><div class="col-sm-8"><input placeholder="请输入网址" class="form-control" name="key" value="{key}"></div></div>'.replace('{key}', key);
-                                case 'keys':
+                                case 'key':
                                     return '<div class="form-group"><label class="col-sm-3 control-label">匹配内容</label><div class="col-sm-8"><textarea placeholder="请输入内容" rows="5" class="form-control" name="key"></textarea></div></div>'.replace('{key}', key);
                                 case 'event':
                                     var options = {

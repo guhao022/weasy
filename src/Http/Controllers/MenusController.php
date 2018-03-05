@@ -40,18 +40,13 @@ class MenusController extends Controller
 
         $account_id = account()->chosedId();
 
-        $this->menuRepository->destroyMenu($account_id);
+        $this->menuRepository->destroyAll($account_id);
 
         $input = $request->menus;
 
         $this->menuRepository->storeMulti($account_id, $input);
 
         return response()->json(['status'=>true, 'message'=>'添加菜单成功']);
-    }
-
-    public function update($id) {
-
-        //$this->menuRepository->
     }
 
     public function destroy(Request $request) {

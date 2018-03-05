@@ -77,13 +77,19 @@ class MenusRepository
         }
     }
 
-    public function destroyMenu($accountId) {
+    /**
+     * 删除所有菜单
+     *
+     * @param $accountId
+     */
+    public function destroyAll($accountId) {
 
         $menus = $this->all($accountId);
 
         array_map(function ($menu) {
 
             if ($menu['type'] == 'event' && !empty($menu['key'])) {
+
                 $this->eventRepository->distoryByEventKey($menu['key']);
             }
 
@@ -91,6 +97,22 @@ class MenusRepository
 
         $this->menu->where('account_id', $accountId)->delete();
 
+    }
+
+    /**
+     * 删除菜单
+     *
+     * @param $id
+     */
+    public function destroy($ids) {
+
+        $del = $this->menu->whereIn('id', $ids)->delete();
+
+        if ($del) {
+
+            // 删除子菜单
+            $this->menu->where('pid', $id)->delete();
+        }
     }
 
     /**
