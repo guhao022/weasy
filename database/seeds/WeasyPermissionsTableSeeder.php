@@ -108,8 +108,8 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1009,
-                'name'=>'weasy.menu.update',
-                'display_name'=>'修改菜单',
+                'name'=>'weasy.menu.destroy',
+                'display_name'=>'删除菜单',
                 'icon' => '',
                 'is_menu' => '0',
                 'group_name'=>'func',
@@ -118,13 +118,13 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1010,
-                'name'=>'weasy.menu.destroy',
-                'display_name'=>'删除菜单',
+                'name'=>'weasy.message.index',
+                'display_name'=>'消息管理',
                 'icon' => '',
-                'is_menu' => '0',
+                'is_menu' => '1',
                 'group_name'=>'func',
                 'mod_name' => 'weasy',
-                'pid'=>1007
+                'pid'=>1006
             ],
         ];
 
