@@ -79,7 +79,7 @@ class WeasyPermissionsTableSeeder extends Seeder
             [
                 'id'=>1006,
                 'name'=>'weasy.func',
-                'display_name'=>'功能',
+                'display_name'=>'微信功能',
                 'icon' => 'fa-th',
                 'is_menu' => '1',
                 'group_name'=>'func',
@@ -118,13 +118,23 @@ class WeasyPermissionsTableSeeder extends Seeder
             ],
             [
                 'id'=>1010,
-                'name'=>'weasy.message.index',
-                'display_name'=>'消息管理',
+                'name'=>'weasy.material.index',
+                'display_name'=>'素材管理',
                 'icon' => '',
                 'is_menu' => '1',
                 'group_name'=>'func',
                 'mod_name' => 'weasy',
                 'pid'=>1006
+            ],
+            [
+                'id'=>1011,
+                'name'=>'weasy.material.sync',
+                'display_name'=>'素材同步',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'func',
+                'mod_name' => 'weasy',
+                'pid'=>1010
             ],
         ];
 
