@@ -131,7 +131,7 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'name'=>'weasy.poster.index',
                 'display_name'=>'海报',
                 'icon' => '',
-                'is_menu' => '0',
+                'is_menu' => '1',
                 'group_name'=>'addons',
                 'mod_name' => 'weasy',
                 'pid'=>1050
