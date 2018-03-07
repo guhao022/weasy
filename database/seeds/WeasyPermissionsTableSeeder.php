@@ -119,22 +119,52 @@ class WeasyPermissionsTableSeeder extends Seeder
             [
                 'id'=>1050,
                 'name'=>'weasy.addons',
-                'display_name'=>'素材管理',
+                'display_name'=>'扩展功能',
                 'icon' => '',
                 'is_menu' => '1',
-                'group_name'=>'func',
+                'group_name'=>'addons',
                 'mod_name' => 'weasy',
-                'pid'=>1006
+                'pid'=>1000
             ],
             [
-                'id'=>1011,
-                'name'=>'weasy.material.sync',
-                'display_name'=>'素材同步',
+                'id'=>1051,
+                'name'=>'weasy.poster.index',
+                'display_name'=>'海报',
                 'icon' => '',
                 'is_menu' => '0',
-                'group_name'=>'func',
+                'group_name'=>'addons',
                 'mod_name' => 'weasy',
-                'pid'=>1010
+                'pid'=>1050
+            ],
+            [
+                'id'=>1052,
+                'name'=>'weasy.poster.create',
+                'display_name'=>'新增海报',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'addons',
+                'mod_name' => 'weasy',
+                'pid'=>1050
+            ],
+            [
+                'id'=>1053,
+                'name'=>'weasy.poster.update',
+                'display_name'=>'更新海报',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'addons',
+                'mod_name' => 'weasy',
+                'pid'=>1050
+            ],
+            [
+                'id'=>1054,
+                'name'=>'weasy.poster.destroy',
+                'display_name'=>'删除海报',
+                'icon' => '',
+                'is_menu' => '0',
+                'group_name'=>'addons',
+                'mod_name' => 'weasy',
+                'pid'=>1050
             ],
         ];
 
