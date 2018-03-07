@@ -117,8 +117,8 @@ class WeasyPermissionsTableSeeder extends Seeder
                 'pid'=>1007
             ],
             [
-                'id'=>1010,
-                'name'=>'weasy.material.index',
+                'id'=>1050,
+                'name'=>'weasy.addons',
                 'display_name'=>'素材管理',
                 'icon' => '',
                 'is_menu' => '1',
