@@ -20,12 +20,25 @@ Route::group([
             Route::get('chose/{id}', 'AccountController@chose')->name('weasy.account.chose');
         });
 
-        Route::group(['prefix' => 'menu', 'middleware' => 'account'], function (){
-            Route::get('/', 'MenusController@index')->name('weasy.menu.index');
-            Route::post('store', 'MenusController@store')->name('weasy.menu.store');
-            Route::put('update/{id}', 'MenusController@update')->name('weasy.menu.update');
-            Route::delete('destroy', 'MenusController@destroy')->name('weasy.menu.destroy');
+        Route::group(['middleware' => 'account'], function () {
+
+            Route::group(['prefix' => 'menu'], function () {
+                Route::get('/', 'MenusController@index')->name('weasy.menu.index');
+                Route::post('store', 'MenusController@store')->name('weasy.menu.store');
+                Route::put('update/{id}', 'MenusController@update')->name('weasy.menu.update');
+                Route::delete('destroy', 'MenusController@destroy')->name('weasy.menu.destroy');
+            });
+
+            Route::group(['prefix' => 'poster'], function (){
+                Route::get('/', 'PosterController@index')->name('weasy.poster.index');
+                Route::post('store', 'PosterController@store')->name('weasy.poster.store');
+                Route::put('update/{id}', 'PosterController@update')->name('weasy.poster.update');
+                Route::delete('destroy', 'PosterController@destroy')->name('weasy.poster.destroy');
+            });
+
         });
+
+
 
     });
 
